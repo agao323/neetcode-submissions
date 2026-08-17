@@ -1,0 +1,22 @@
+class Solution:
+    def canJump(self, nums: List[int]) -> bool:
+        """
+        can jump backwards
+
+        initial thoughts:
+            - dfs through the possible paths, which is jump forward or jump back
+            - base case: curr index < 0 or >= len(nums), we're out of bounds
+                return False
+            - base case: curr index == len(nums) - 1
+                return True
+            - dfs(curr - curr[i]), dfs(curr + curr[i])
+        """
+        def dfs(i):
+            if i == len(nums) - 1:
+                return True
+            if i < 0 or i >= len(nums) or nums[i] == 0:
+                return False
+            
+            return dfs(i + nums[i]) or dfs(i - nums[i])
+        
+        return dfs(0)
