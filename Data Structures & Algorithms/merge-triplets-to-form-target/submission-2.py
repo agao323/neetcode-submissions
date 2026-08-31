@@ -1,0 +1,29 @@
+class Solution:
+    def mergeTriplets(self, triplets: List[List[int]], target: List[int]) -> bool:
+        """
+        TIME:
+            9:29
+            
+        a triplet can be considered if one or more of its values equals the
+        target values, and the other ones are not greater than the other
+        target values
+
+        if we can fill all three slots this way, we can return true
+        """
+
+        slots = [False] * 3
+
+        for a, b, c in triplets:
+            if a > target[0] or b > target[1] or c > target[2]:
+                continue
+            if a == target[0] and b <= target[1] and c <= target[2]:
+                slots[0] = True
+            if a <= target[0] and b == target[1] and c <= target[2]:
+                slots[1] = True
+            if a <= target[0] and b <= target[1] and c == target[2]:
+                slots[2] = True
+            if all(slots):
+                return True
+        
+        return False
+
